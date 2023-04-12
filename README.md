@@ -8,9 +8,12 @@ UID2 attestation implementation for AWS Nitro Enclave.
 
 ## How to Install
 
+For maven projects:
+```
 <!-- https://mvnrepository.com/artifact/com.uid2/attestation-aws -->
 <dependency>
     <groupId>com.uid2</groupId>
     <artifactId>attestation-aws</artifactId>
     <version>1.1.0</version>
 </dependency>
+```
