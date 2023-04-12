@@ -1,4 +1,4 @@
-# uid2-attestation-aws
+# UID2 Attestation AWS
 
 UID2 attestation implementation for AWS Nitro Enclave.
 
