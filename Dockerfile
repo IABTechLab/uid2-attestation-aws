@@ -1,9 +1,9 @@
-FROM rust:1.43 as jnsm_builder
+FROM rust:1.72 as jnsm_builder
 COPY ./jnsm /
 WORKDIR /jnsm
 RUN cargo build --lib --release
 
-FROM maven:3.6.0-jdk-8 AS java_builder
+FROM maven:3.8.6-jdk-8 AS java_builder
 WORKDIR /
 COPY attestation-aws /attestation-aws
 COPY example /example
