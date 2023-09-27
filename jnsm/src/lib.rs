@@ -1,8 +1,7 @@
 use jni::JNIEnv;
 use jni::objects::JClass;
 use jni::sys::{jbyteArray, jint, jbyte};
-use aws_nitro_enclaves_nsm_api::api::{Digest, ErrorCode, Request, Response};
-use aws_nitro_enclaves_nsm_api::driver::{nsm_exit, nsm_init, nsm_process_request};
+use nsm_io::{Request, Response, ErrorCode};
 use serde_bytes::ByteBuf;
 
 #[no_mangle]
@@ -46,19 +45,19 @@ struct Nsm {
 
 impl Drop for Nsm {
     fn drop(&mut self) {
-        nsm_exit(self.fd);
+        nsm_driver::nsm_exit(self.fd);
     }
 }
 
 impl Nsm {
     pub fn connect() -> Self {
         Self {
-            fd: nsm_init(),
+            fd: nsm_driver::nsm_init(),
         }
     }
 
     pub fn generate_attestation(&self, params: AttestationParams) -> Result<Vec<u8>, i32> {
-        match nsm_process_request(self.fd, Request::Attestation {
+        match nsm_driver::nsm_process_request(self.fd, Request::Attestation {
             user_data: params.user_data.map(ByteBuf::from),
             nonce: params.nonce.map(ByteBuf::from),
             public_key: params.public_key.map(ByteBuf::from),
