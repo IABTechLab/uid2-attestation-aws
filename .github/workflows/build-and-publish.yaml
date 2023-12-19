@@ -32,6 +32,5 @@ jobs:
       publish_to_maven: ${{ inputs.publish_to_maven }}
       java_version: ${{ inputs.java_version }}
       publish_vulnerabilities: ${{ inputs.publish_vulnerabilities }}
-      pom_path: attestation-aws/pom.xml
-      version_path: attestation-aws/version.json
+      working_dir: attestation-aws
     secrets: inherit
