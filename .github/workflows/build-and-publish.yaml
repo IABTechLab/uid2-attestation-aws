@@ -33,4 +33,5 @@ jobs:
       java_version: ${{ inputs.java_version }}
       publish_vulnerabilities: ${{ inputs.publish_vulnerabilities }}
       pom_path: attestation-aws/pom.xml
+      version_path: attestation-aws/version.json
     secrets: inherit
