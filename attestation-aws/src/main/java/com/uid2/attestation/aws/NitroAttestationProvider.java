@@ -6,9 +6,9 @@ import java.util.Arrays;
 
 public class NitroAttestationProvider implements IAttestationProvider {
     @Override
-    public byte[] getAttestationRequest(byte[] publicKey) throws AttestationException {
+    public byte[] getAttestationRequest(byte[] publicKey, byte[] userData) throws AttestationException {
         try {
-            NitroAttestationParams params = new NitroAttestationParams(null, publicKey, null);
+            NitroAttestationParams params = new NitroAttestationParams(userData, publicKey, null);
             NitroAttestationRequest request = NitroAttestation.generateAttestationRequest(params);
             return Arrays.copyOfRange(request.getData(), 0, request.getLength());
         } catch (NitroException e) {
