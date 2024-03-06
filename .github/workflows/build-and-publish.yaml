@@ -5,23 +5,23 @@ on:
     inputs:
       release_type:
         type: choice
-        description: 'The type of release'
+        description: The type of release
         options:
         - Major
         - Minor
         - Patch
         - Snapshot
       publish_to_maven:
-        description: 'True to publish the artifacts to Maven repository, false to skip the step'
+        description: True to publish the artifacts to Maven repository, false to skip the step
         default: false
         required: false
         type: boolean
       java_version:
         type: string
-        default: '11'
+        default: 11
       publish_vulnerabilities:
         type: string
-        default: 'true'
+        default: true
 
 jobs:
   build-and-pubish:
