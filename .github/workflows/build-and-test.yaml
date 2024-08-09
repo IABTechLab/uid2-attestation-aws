@@ -7,3 +7,4 @@ jobs:
     secrets: inherit
     with:
       working_dir: attestation-aws/
+      java_version: 21
