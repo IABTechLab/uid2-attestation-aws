@@ -8,4 +8,4 @@ jobs:
     with:
       working_dir: attestation-aws/
       java_version: 21
-      skip_tests: true
+      skip_tests: true # No tests are present in this repository
