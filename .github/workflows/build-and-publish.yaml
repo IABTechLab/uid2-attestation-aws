@@ -41,4 +41,5 @@ jobs:
       publish_vulnerabilities: ${{ inputs.publish_vulnerabilities }}
       vulnerability_failure_severity: ${{ inputs.vulnerability_failure_severity }}
       working_dir: attestation-aws
+      skip_tests: true # No tests are present in this repository
     secrets: inherit
