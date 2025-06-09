@@ -6,7 +6,7 @@
 
   <groupId>com.uid2</groupId>
   <artifactId>attestation-aws</artifactId>
-  <version>2.1.1-alpha-29-SNAPSHOT</version>
+  <version>2.1.0</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>AWS Enclave attestation</description>
