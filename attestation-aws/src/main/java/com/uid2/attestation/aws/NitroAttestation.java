@@ -18,7 +18,9 @@ public class NitroAttestation {
     }
 
     static {
-        System.loadLibrary("jnsm");
+        try {
+            System.loadLibrary("jnsm");
+        } catch (UnsatisfiedLinkError ignored) {}
     }
 
     private static native int generateAttestationRequestInternal(
