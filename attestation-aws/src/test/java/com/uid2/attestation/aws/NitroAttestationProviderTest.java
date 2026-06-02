@@ -4,6 +4,8 @@ import com.uid2.enclave.AttestationException;
 import org.junit.Test;
 import org.mockito.MockedStatic;
 
+import org.mockito.ArgumentCaptor;
+
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mockStatic;
@@ -17,12 +19,16 @@ public class NitroAttestationProviderTest {
         NitroAttestationRequest stub = new NitroAttestationRequest(fullBuffer, 3);
 
         try (MockedStatic<NitroAttestation> mocked = mockStatic(NitroAttestation.class)) {
-            mocked.when(() -> NitroAttestation.generateAttestationRequest(any())).thenReturn(stub);
+            ArgumentCaptor<NitroAttestationParams> captor = ArgumentCaptor.forClass(NitroAttestationParams.class);
+            mocked.when(() -> NitroAttestation.generateAttestationRequest(captor.capture())).thenReturn(stub);
 
             byte[] result = new NitroAttestationProvider()
                     .getAttestationRequest(new byte[]{9}, new byte[]{8});
 
             assertArrayEquals(new byte[]{1, 2, 3}, result);
+            assertArrayEquals(new byte[]{9}, captor.getValue().publicKey);
+            assertArrayEquals(new byte[]{8}, captor.getValue().userData);
+            assertNull(captor.getValue().nonce);
         }
     }
 
@@ -43,6 +49,7 @@ public class NitroAttestationProviderTest {
 
     @Test
     public void testIsReadyDefaultTrue() {
+        // NitroAttestationProvider delegates to IAttestationProvider.isReady() default (always true)
         assertTrue(new NitroAttestationProvider().isReady());
     }
 }
