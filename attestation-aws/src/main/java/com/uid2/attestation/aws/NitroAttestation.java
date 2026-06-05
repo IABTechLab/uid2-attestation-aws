@@ -18,7 +18,12 @@ public class NitroAttestation {
     }
 
     static {
-        System.loadLibrary("jnsm");
+        try {
+            System.loadLibrary("jnsm");
+        } catch (UnsatisfiedLinkError ignored) {
+            // Intentionally ignored in non-Nitro environments (e.g. test JVMs without jnsm).
+            // generateAttestationRequestInternal() will throw UnsatisfiedLinkError on first call.
+        }
     }
 
     private static native int generateAttestationRequestInternal(
